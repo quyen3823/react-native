@@ -1,13 +1,13 @@
 
-import { StyleSheet, Text, TextInput, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList } from 'react-native';
 import {useState} from 'react';
 
 export default function App() {
   const [name, setName] = useState<string>("react native");
 
   const [todoList, setTodoList] = useState([
-    { id: 1, title: "Learn React Native" },
-    { id: 2, title: "Learn React.js" },
+    { id: 1, title: "Learn React Native"},
+    { id: 2, title: "Learn React.js"},
     { id: 3, title: "Watching Netflix" },
     { id: 4, title: "Playing ESport" },
     { id: 5, title: "Subscribe Hỏi Dân IT :v" },
@@ -53,7 +53,21 @@ export default function App() {
       <Button title='Add new'
       onPress={() => alert("tap me")}
       color="green" />
-      <ScrollView style={{marginTop: 20, borderColor: "red", 
+
+      <FlatList 
+       style={{marginTop: 20, borderColor: "red", 
+        borderWidth: 1}}
+      data = {todoList}
+      keyExtractor={item => item.id + ""}
+      renderItem={({item}) => {
+        
+        return (
+          <Text key={item.id} style={styles.todo}>{item.title}</Text>
+        )
+
+      }}
+      />
+      {/* <ScrollView style={{marginTop: 20, borderColor: "red", 
         borderWidth: 1} }>
         {todoList.map(todo => {
           return (
@@ -61,7 +75,8 @@ export default function App() {
           )
 
         })}
-      </ScrollView>
+      </ScrollView> */}
+      
       
     </View>
   );
